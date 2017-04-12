@@ -1,2 +1,6 @@
 *.xml
+<<<<<<< HEAD
 *.iml
+=======
+*.xml
+>>>>>>> refs/remotes/origin/master

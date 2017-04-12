@@ -20,7 +20,7 @@ class QueryBuilder:
 
     def read_file(dir, dirTo, fileName):
 
-        newName = dirTo + "New" + fileName + ".txt"
+        newName = dirTo + "New" + fileName[:-3] + ".txt"
         file = open(dir + fileName,"r")
 
         if os.path.exists(newName):
@@ -35,12 +35,18 @@ class QueryBuilder:
 
                             if ("class" in line.lower()):
                                 tableName = line.strip()
-                                valCount = tableName.count(' ')
+                                tableName = QueryBuilder.remove_parent_classes(tableName)
 
-                                if (valCount == 2):
+                                stringCount = tableName.count(' ')
+                                newFile = open(newName, "a")
+
+                                if (stringCount == 2):
                                     tableName = tableName.split(' ', 2)[2]
-                                    newFile = open(newName, "a")
-                                    newFile.write(tableName)
+                                elif (stringCount > 2):
+                                    tableName = tableName.split(' ', 3)[3]
+
+                                newFile.write("[dp].[" + tableName + "]")
+
 
                             typeLine = next((typeName for typeName in QueryBuilder.known_types if typeName in line.split(" ")), False)
                             # ignore calculated fields. We assume that any basic property will have the closing
@@ -56,6 +62,14 @@ class QueryBuilder:
     def dir_builder(dirFrom, dirTo):
         for f in listdir(dirFrom) :
             QueryBuilder.read_file(dirFrom, dirTo, f)
+
+    def remove_parent_classes(stringToFormat):
+        if (':' in stringToFormat):
+            preLength = stringToFormat.find(':') - 1
+            stringToFormat = stringToFormat[:-(len(stringToFormat) - preLength)]
+            stringToFormat = stringToFormat.strip()
+
+        return stringToFormat
 
 QueryBuilder.dir_builder("Files/", "Build/")
 print("Done...")
