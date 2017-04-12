@@ -1,6 +1,13 @@
 *.xml
 <<<<<<< HEAD
+<<<<<<< HEAD
 *.xml
 =======
 *.iml
+>>>>>>> refs/remotes/origin/parameterExtract
+=======
+*.iml
+=======
+*.xml
+>>>>>>> refs/remotes/origin/master
 >>>>>>> refs/remotes/origin/parameterExtract
