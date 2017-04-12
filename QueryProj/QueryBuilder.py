@@ -1,6 +1,7 @@
 import os
 from os import listdir
 import app as app
+import time
 from flask import Flask
 app = Flask(__name__)
 
@@ -23,6 +24,7 @@ class QueryBuilder:
 
         newName = dirTo + fileName[:-3] + ".sql"
         file = open(dir + fileName,"r")
+        modelClass = False
 
         if os.path.exists(newName):
             os.remove(newName)
@@ -37,6 +39,7 @@ class QueryBuilder:
                         if ("[required" not in line.lower()):
 
                             if ("class" in line.lower()):
+                                modelClass = True
                                 tableName = line.strip()
                                 tableName = QueryBuilder.remove_parent_classes(tableName)
 
@@ -61,6 +64,25 @@ class QueryBuilder:
                                 newFile = open(newName, "a")
                                 newFile.write("\n"+QueryBuilder.extract_parameter(typeLine, line))
 
+        newFile.close()
+
+        if (modelClass == True):
+            newFile = open(newName, "r")
+            lines = newFile.readlines()
+            topLines = lines[:-1]
+            bottomLine = (lines[len(lines)-1:])[0]
+            if "," in bottomLine:
+                botStr = bottomLine[:-1]
+                newFile.close()
+
+                if os.path.exists(newName):
+                    os.remove(newName)
+
+                newFile = open(newName, "a")
+                newFile.writelines("%s" % item for item in topLines)
+                newFile.write(botStr)
+                newFile.close()
+
         newFile = open(newName, "a")
         newFile.write("\n)\n\nGO")
 
@@ -76,5 +98,7 @@ class QueryBuilder:
 
         return stringToFormat
 
+startTime = time.time()
 QueryBuilder.dir_builder("Files/", "Build/", "YamahaEOHIntegration")
+print("Elapsed Time: " + str(time.time() - startTime) + " seconds")
 print("Done...")
