@@ -97,8 +97,3 @@ class QueryBuilder:
             stringToFormat = stringToFormat.strip()
 
         return stringToFormat
-
-startTime = time.time()
-QueryBuilder.dir_builder("Files/", "Build/", "YamahaEOHIntegration")
-print("Elapsed Time: " + str(time.time() - startTime) + " seconds")
-print("Done...")
