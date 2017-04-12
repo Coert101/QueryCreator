@@ -12,3 +12,6 @@
 >>>>>>> refs/remotes/origin/master
 >>>>>>> refs/remotes/origin/parameterExtract
 *.xml
+*.xml
+QueryProj/.idea/QueryProj.iml
+*.xml
