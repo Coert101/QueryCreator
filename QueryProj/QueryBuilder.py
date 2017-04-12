@@ -1,6 +1,10 @@
 import os
 from os import listdir
-from os.path import isfile, join
+
+import app as app
+from flask import Flask
+app = Flask(__name__)
+
 
 class QueryBuilder:
 
@@ -44,6 +48,10 @@ class QueryBuilder:
             stringToFormat = stringToFormat.strip()
 
         return stringToFormat
+
+    @app.route("/stop/")
+    def test(self):
+        print("Button clicked")
 
 QueryBuilder.dir_builder("Files/", "Build/")
 print("Done...")
