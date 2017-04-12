@@ -1,15 +1,12 @@
 import os
 from os import listdir
-
 import app as app
 from flask import Flask
 app = Flask(__name__)
 
-
 class QueryBuilder:
     known_types = ["string", "int", "double", "decimal", "bool", "DateTime"]
     type_equivalent = ["VARCHAR (255)", "INT", "DECIMAL", "DECIMAL", "BIT", "DATETIME"]
-
 
 
     def extract_parameter(typeName, paramLine):
@@ -20,16 +17,18 @@ class QueryBuilder:
         typeName = QueryBuilder.type_equivalent[ QueryBuilder.known_types.index(typeName) ]
 
         # how do we determine whether it is nullable?
-        return paramName + "\t\t" + typeName + "\t\tNOT NULL"
+        return '\t' + paramName + ' ' + typeName + " NOT NULL,"
 
-    def read_file(dir, dirTo, fileName):
+    def read_file(dir, dirTo, fileName, dbName):
 
-        newName = dirTo + "New" + fileName[:-3] + ".txt"
+        newName = dirTo + fileName[:-3] + ".sql"
         file = open(dir + fileName,"r")
 
         if os.path.exists(newName):
             os.remove(newName)
 
+        newFile = open(newName, "a")
+        newFile.write("USE [" + dbName + "]\nGO\n\nSET ANSI_NULLS ON\nGO\n\nSET QUOTED_IDENTIFIER ON\nGO\n\n")
 
         for line in file:
             if (line.strip() != ""):
@@ -49,7 +48,7 @@ class QueryBuilder:
                                 elif (stringCount > 2):
                                     tableName = tableName.split(' ', 3)[3]
 
-                                newFile.write("[dp].[" + tableName + "]")
+                                newFile.write("CREATE TABLE [dp].[" + tableName + "] (")
 
 
                             typeLine = next((typeName for typeName in QueryBuilder.known_types if typeName in line.split(" ")), False)
@@ -62,10 +61,12 @@ class QueryBuilder:
                                 newFile = open(newName, "a")
                                 newFile.write("\n"+QueryBuilder.extract_parameter(typeLine, line))
 
+        newFile = open(newName, "a")
+        newFile.write("\n)\n\nGO")
 
-    def dir_builder(dirFrom, dirTo):
+    def dir_builder(dirFrom, dirTo, dbName):
         for f in listdir(dirFrom) :
-            QueryBuilder.read_file(dirFrom, dirTo, f)
+            QueryBuilder.read_file(dirFrom, dirTo, f, dbName)
 
     def remove_parent_classes(stringToFormat):
         if (':' in stringToFormat):
@@ -75,9 +76,5 @@ class QueryBuilder:
 
         return stringToFormat
 
-    @app.route("/stop/")
-    def test(self):
-        print("Button clicked")
-
-QueryBuilder.dir_builder("Files/", "Build/")
+QueryBuilder.dir_builder("Files/", "Build/", "YamahaEOHIntegration")
 print("Done...")
