@@ -1,9 +1,7 @@
 import os
 from os import listdir
-
-import app as app
-from flask import Flask
-app = Flask(__name__)
+from app import app
+from flask import request
 
 
 class QueryBuilder:
@@ -24,8 +22,8 @@ class QueryBuilder:
 
     def read_file(dir, dirTo, fileName):
 
-        newName = dirTo + "New" + fileName[:-3] + ".txt"
-        file = open(dir + fileName,"r")
+        newName = dirTo + "/New" + fileName[:-3] + ".txt"
+        file = open(dir +"/"+ fileName,"r")
 
         if os.path.exists(newName):
             os.remove(newName)
@@ -64,7 +62,7 @@ class QueryBuilder:
 
 
     def dir_builder(dirFrom, dirTo):
-        for f in listdir(dirFrom) :
+        for f in listdir(dirFrom):
             QueryBuilder.read_file(dirFrom, dirTo, f)
 
     def remove_parent_classes(stringToFormat):
@@ -75,9 +73,15 @@ class QueryBuilder:
 
         return stringToFormat
 
-    @app.route("/stop/")
-    def test(self):
-        print("Button clicked")
 
-QueryBuilder.dir_builder("Files/", "Build/")
-print("Done...")
+    @app.route("/stop/<test>")
+    def test(test):
+        return "<h1>Button clicked</h1>"
+
+
+@app.route("/build", methods=["POST"])
+def dir_builder():
+    dirFrom = request.form['dirFrom']
+    dirTo = request.form['dirTo']
+    QueryBuilder.dir_builder(dirFrom, dirTo)
+    return "<h1>Created " + str(len(listdir(dirTo))) + " scripts</h2>"
