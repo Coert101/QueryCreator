@@ -1,14 +1,11 @@
 import os
 from os import listdir
-<<<<<<< HEAD
+
 from app import app
 from flask import request
-=======
-import app as app
+
 import time
-from flask import Flask
-app = Flask(__name__)
->>>>>>> origin/master
+
 
 class QueryBuilder:
     known_types = ["string", "int", "double", "decimal", "bool", "DateTime"]
@@ -27,14 +24,10 @@ class QueryBuilder:
 
     def read_file(dir, dirTo, fileName, dbName):
 
-<<<<<<< HEAD
         newName = dirTo + "/New" + fileName[:-3] + ".txt"
         file = open(dir +"/"+ fileName,"r")
-=======
-        newName = dirTo + fileName[:-3] + ".sql"
-        file = open(dir + fileName,"r")
+        newName = dirTo + "/" + fileName[:-3] + ".sql"
         modelClass = False
->>>>>>> origin/master
 
         if os.path.exists(newName):
             os.remove(newName)
@@ -85,26 +78,11 @@ class QueryBuilder:
                 botStr = bottomLine[:-1]
                 newFile.close()
 
-<<<<<<< HEAD
-    def dir_builder(dirFrom, dirTo):
-        for f in listdir(dirFrom):
-            QueryBuilder.read_file(dirFrom, dirTo, f)
-=======
-                if os.path.exists(newName):
-                    os.remove(newName)
-
-                newFile = open(newName, "a")
-                newFile.writelines("%s" % item for item in topLines)
-                newFile.write(botStr)
-                newFile.close()
-
-        newFile = open(newName, "a")
-        newFile.write("\n)\n\nGO")
 
     def dir_builder(dirFrom, dirTo, dbName):
         for f in listdir(dirFrom) :
             QueryBuilder.read_file(dirFrom, dirTo, f, dbName)
->>>>>>> origin/master
+
 
     def remove_parent_classes(stringToFormat):
         if (':' in stringToFormat):
@@ -114,7 +92,7 @@ class QueryBuilder:
 
         return stringToFormat
 
-<<<<<<< HEAD
+
 
     @app.route("/stop/<test>")
     def test(test):
@@ -125,11 +103,7 @@ class QueryBuilder:
 def dir_builder():
     dirFrom = request.form['dirFrom']
     dirTo = request.form['dirTo']
-    QueryBuilder.dir_builder(dirFrom, dirTo)
-    return "<h1>Created " + str(len(listdir(dirTo))) + " scripts</h2>"
-=======
-startTime = time.time()
-QueryBuilder.dir_builder("Files/", "Build/", "YamahaEOHIntegration")
-print("Elapsed Time: " + str(time.time() - startTime) + " seconds")
-print("Done...")
->>>>>>> origin/master
+    startTime = time.time()
+    QueryBuilder.dir_builder(dirFrom, dirTo, "YamahaEOHIntegration")
+    timeElapsed = time.time() - startTime
+    return "<h1>Created " + str(len(listdir(dirTo))) + " scripts in " + str(timeElapsed) + "seconds </h2>"
