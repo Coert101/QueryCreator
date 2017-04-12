@@ -20,28 +20,30 @@ class QueryBuilder:
 
                             if ("class" in line.lower()):
                                 tableName = line.strip()
+                                tableName = QueryBuilder.remove_parent_classes(tableName)
 
-                                if (':' in tableName):
-                                    preLength = tableName.find(':') - 1
-                                    tableName = tableName[:-(len(tableName) - preLength)]
-                                    tableName = tableName.strip()
-                                    print(tableName)
+                                stringCount = tableName.count(' ')
+                                newFile = open(newName, "a")
 
-                                valCount = tableName.count(' ')
-
-                                if (valCount == 2):
+                                if (stringCount == 2):
                                     tableName = tableName.split(' ', 2)[2]
-                                    newFile = open(newName, "a")
-                                    newFile.write("[dp].[" + tableName + "]")
-                                elif (valCount > 2):
+                                elif (stringCount > 2):
                                     tableName = tableName.split(' ', 3)[3]
-                                    newFile = open(newName, "a")
-                                    newFile.write("[dp].[" + tableName + "]")
+
+                                newFile.write("[dp].[" + tableName + "]")
 
 
     def dir_builder(dirFrom, dirTo):
         for f in listdir(dirFrom) :
             QueryBuilder.read_file(dirFrom, dirTo, f)
+
+    def remove_parent_classes(stringToFormat):
+        if (':' in stringToFormat):
+            preLength = stringToFormat.find(':') - 1
+            stringToFormat = stringToFormat[:-(len(stringToFormat) - preLength)]
+            stringToFormat = stringToFormat.strip()
+
+        return stringToFormat
 
 QueryBuilder.dir_builder("Files/", "Build/")
 print("Done...")
