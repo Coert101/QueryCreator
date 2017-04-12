@@ -3,7 +3,7 @@ using Yamaha.Business.Model.Warranty.Owner;
 
 namespace Yamaha.Business.Model.Warranty
 {
-    public class WarrantySearch
+    public static class WarrantySearch
     {
         public string WarrantyAccountNumber { get; set; }
         public string SerialNumber { get; set; }

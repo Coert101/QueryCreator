@@ -6,7 +6,7 @@ class QueryBuilder:
 
     def read_file(dir, dirTo, fileName):
 
-        newName = dirTo + "New" + fileName + ".txt"
+        newName = dirTo + "New" + fileName[:-3] + ".txt"
         file = open(dir + fileName,"r")
 
         if os.path.exists(newName):
@@ -20,12 +20,24 @@ class QueryBuilder:
 
                             if ("class" in line.lower()):
                                 tableName = line.strip()
+
+                                if (':' in tableName):
+                                    preLength = tableName.find(':') - 1
+                                    tableName = tableName[:-(len(tableName) - preLength)]
+                                    tableName = tableName.strip()
+                                    print(tableName)
+
                                 valCount = tableName.count(' ')
 
                                 if (valCount == 2):
                                     tableName = tableName.split(' ', 2)[2]
                                     newFile = open(newName, "a")
-                                    newFile.write(tableName)
+                                    newFile.write("[dp].[" + tableName + "]")
+                                elif (valCount > 2):
+                                    tableName = tableName.split(' ', 3)[3]
+                                    newFile = open(newName, "a")
+                                    newFile.write("[dp].[" + tableName + "]")
+
 
     def dir_builder(dirFrom, dirTo):
         for f in listdir(dirFrom) :
