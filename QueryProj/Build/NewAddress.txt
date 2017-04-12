@@ -1,0 +1,5 @@
+[dp].[Address]
+[PhysicalCity]		VARCHAR (255)		NOT NULL
+[PhysicalAddressDescriptor]		VARCHAR (255)		NOT NULL
+[PostalAddress]		VARCHAR (255)		NOT NULL
+[PostalCode]		VARCHAR (255)		NOT NULL

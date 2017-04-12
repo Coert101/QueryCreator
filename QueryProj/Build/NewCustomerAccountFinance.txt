@@ -1,0 +1,7 @@
+[dp].[CustomerAccountFinance]
+[AccountCode]		VARCHAR (255)		NOT NULL
+[BranchCode]		VARCHAR (255)		NOT NULL
+[CreditLimit]		DECIMAL		NOT NULL
+[CurrentBalance]		DECIMAL		NOT NULL
+[OutstandingBalance]		DECIMAL		NOT NULL
+[OnHold]		BIT		NOT NULL

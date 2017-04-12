@@ -1,2 +1,6 @@
 *.xml
+<<<<<<< HEAD
 *.xml
+=======
+*.iml
+>>>>>>> refs/remotes/origin/parameterExtract

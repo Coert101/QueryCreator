@@ -1,0 +1,8 @@
+[dp].[AccountPayment]
+[Invoice]		VARCHAR (255)		NOT NULL
+[InvoiceType]		VARCHAR (255)		NOT NULL
+[Reference]		VARCHAR (255)		NOT NULL
+[TransactionValue]		DECIMAL		NOT NULL
+[PaymentJournal]		VARCHAR (255)		NOT NULL
+[JournalDate]		DATETIME		NOT NULL
+[DiscountValue]		DECIMAL		NOT NULL

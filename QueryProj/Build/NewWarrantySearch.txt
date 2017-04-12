@@ -1,0 +1,10 @@
+[dp].[WarrantySearch]
+[WarrantyAccountNumber]		VARCHAR (255)		NOT NULL
+[SerialNumber]		VARCHAR (255)		NOT NULL
+[OwnerCode]		VARCHAR (255)		NOT NULL
+[OwnerIdentification]		VARCHAR (255)		NOT NULL
+[OwnerName]		VARCHAR (255)		NOT NULL
+[OwnerEmailAddress]		VARCHAR (255)		NOT NULL
+[OwnerCellphoneNumber]		VARCHAR (255)		NOT NULL
+[DateOfSale]		DATETIME		NOT NULL
+[ExpiryDate]		DATETIME		NOT NULL

@@ -1,0 +1,11 @@
+[dp].[PurchaseDetail]
+[Salesperson]		VARCHAR (255)		NOT NULL
+[WarrantyAccountNumber]		VARCHAR (255)		NOT NULL
+[Model]		VARCHAR (255)		NOT NULL
+[Accessories]		VARCHAR (255)		NOT NULL
+[Price]		DECIMAL		NOT NULL
+[UsageFrequency]		VARCHAR (255)		NOT NULL
+[UsageOther]		VARCHAR (255)		NOT NULL
+[PurchaseReason]		VARCHAR (255)		NOT NULL
+[BrandsEvaluated]		VARCHAR (255)		NOT NULL
+[ServiceDealership]		VARCHAR (255)		NOT NULL

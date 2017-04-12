@@ -1,0 +1,7 @@
+[dp].[WarrantyDetail]
+[WarrantyAccountNumber]		VARCHAR (255)		NOT NULL
+[SerialNumber]		VARCHAR (255)		NOT NULL
+[DateOfSale]		DATETIME		NOT NULL
+[ExpiryDate]		DATETIME		NOT NULL
+[RegistrationDate]		DATETIME		NOT NULL
+[TransferredFrom]		VARCHAR (255)		NOT NULL

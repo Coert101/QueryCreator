@@ -1,0 +1,6 @@
+[dp].[WarrantyRegistrationItem]
+[LineNumber]		INT		NOT NULL
+[DateOfSale]		DATETIME		NOT NULL
+[ExpiryDate]		DATETIME		NOT NULL
+[IsProductDetailComplete]		BIT		NOT NULL
+[IsPurchaseDetailComplete]		BIT		NOT NULL

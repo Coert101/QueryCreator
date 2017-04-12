@@ -1,0 +1,5 @@
+[dp].[Branch]
+[BranchCode]		VARCHAR (255)		NOT NULL
+[AllowSalesOrders]		BIT		NOT NULL
+[AllowMerchandiseAccountQuery]		BIT		NOT NULL
+[AllowUnitAccountQuery]		BIT		NOT NULL

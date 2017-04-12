@@ -1,0 +1,7 @@
+[dp].[MarineDetail]
+[ModelDescription]		VARCHAR (255)		NOT NULL
+[PrimaryId]		VARCHAR (255)		NOT NULL
+[IgnitionKeyNo]		VARCHAR (255)		NOT NULL
+[BoatSize]		VARCHAR (255)		NOT NULL
+[BoatType]		VARCHAR (255)		NOT NULL
+[Hin]		VARCHAR (255)		NOT NULL

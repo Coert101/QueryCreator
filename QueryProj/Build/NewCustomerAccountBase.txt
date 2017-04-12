@@ -1,0 +1,25 @@
+[dp].[CustomerAccountBase]
+[AccountCode]		VARCHAR (255)		NOT NULL
+[AccountName]		VARCHAR (255)		NOT NULL
+[IsMasterAccount]		BIT		NOT NULL
+[ContactNumber]		VARCHAR (255)		NOT NULL
+[Salesperson]		VARCHAR (255)		NOT NULL
+[BranchCode]		VARCHAR (255)		NOT NULL
+[SoldToAddress1]		VARCHAR (255)		NOT NULL
+[SoldToAddress2]		VARCHAR (255)		NOT NULL
+[SoldToAddress3]		VARCHAR (255)		NOT NULL
+[SoldToAddress3Location]		VARCHAR (255)		NOT NULL
+[SoldToAddress4]		VARCHAR (255)		NOT NULL
+[SoldToAddress5]		VARCHAR (255)		NOT NULL
+[SoldPostalCode]		VARCHAR (255)		NOT NULL
+[ShipToAddress1]		VARCHAR (255)		NOT NULL
+[ShipToAddress2]		VARCHAR (255)		NOT NULL
+[ShipToAddress3]		VARCHAR (255)		NOT NULL
+[ShipToAddress3Location]		VARCHAR (255)		NOT NULL
+[ShipToAddress4]		VARCHAR (255)		NOT NULL
+[ShipToAddress5]		VARCHAR (255)		NOT NULL
+[ShipPostalCode]		VARCHAR (255)		NOT NULL
+[CreditLimit]		DECIMAL		NOT NULL
+[CurrentBalance]		DECIMAL		NOT NULL
+[OutstandingBalance]		DECIMAL		NOT NULL
+[OnHold]		BIT		NOT NULL

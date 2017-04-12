@@ -1,0 +1,7 @@
+[dp].[OwnerSearch]
+[OwnerCode]		VARCHAR (255)		NOT NULL
+[IdentificationNumber]		VARCHAR (255)		NOT NULL
+[Name]		VARCHAR (255)		NOT NULL
+[TelephoneNumber]		VARCHAR (255)		NOT NULL
+[CellphoneNumber]		VARCHAR (255)		NOT NULL
+[EmailAddress]		VARCHAR (255)		NOT NULL

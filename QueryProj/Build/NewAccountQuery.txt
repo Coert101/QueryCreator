@@ -1,0 +1,14 @@
+[dp].[AccountQuery]
+[Address1]		VARCHAR (255)		NOT NULL
+[Address2]		VARCHAR (255)		NOT NULL
+[Address3]		VARCHAR (255)		NOT NULL
+[LastPaymentDate]		DATETIME		NOT NULL
+[Current]		DECIMAL		NOT NULL
+[ThirtyDays]		DECIMAL		NOT NULL
+[SixtyDays]		DECIMAL		NOT NULL
+[NinetyDays]		DECIMAL		NOT NULL
+[HundredTwentyDays]		DECIMAL		NOT NULL
+[TotalNotInvoiced]		DECIMAL		NOT NULL
+[TotalOwingBalance]		DECIMAL		NOT NULL
+[CreditLimit]		DECIMAL		NOT NULL
+[SalesOrdersPendingSubmission]		DECIMAL		NOT NULL

@@ -1,0 +1,13 @@
+[dp].[AccountTransaction]
+[DocumentNumber]		VARCHAR (255)		NOT NULL
+[TransactionDate]		DATETIME		NOT NULL
+[Reference]		VARCHAR (255)		NOT NULL
+[Backorder]		DECIMAL		NOT NULL
+[DueDate]		DATETIME		NOT NULL
+[DebitBalance]		DECIMAL		NOT NULL
+[CreditBalance]		DECIMAL		NOT NULL
+[Balance]		DECIMAL		NOT NULL
+[CustomerPurchaseOrder]		VARCHAR (255)		NOT NULL
+[InvoiceValue]		DECIMAL		NOT NULL
+[EsaValue]		VARCHAR (255)		NOT NULL
+[EsaDate]		DATETIME		NOT NULL

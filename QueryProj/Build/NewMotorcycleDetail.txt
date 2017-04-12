@@ -1,0 +1,5 @@
+[dp].[MotorcycleDetail]
+[ModelDescription]		VARCHAR (255)		NOT NULL
+[VIN]		VARCHAR (255)		NOT NULL
+[FrameNo]		VARCHAR (255)		NOT NULL
+[RegistrationNumber]		VARCHAR (255)		NOT NULL

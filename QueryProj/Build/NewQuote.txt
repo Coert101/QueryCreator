@@ -1,0 +1,3 @@
+[dp].[Quote]
+[QuoteNumber]		VARCHAR (255)		NOT NULL
+[AccountCode]		VARCHAR (255)		NOT NULL

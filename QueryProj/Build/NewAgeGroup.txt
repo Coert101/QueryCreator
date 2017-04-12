@@ -1,0 +1,3 @@
+[dp].[AgeGroup]
+[AgeFrom]		INT		NOT NULL
+[AgeTo]		INT		NOT NULL

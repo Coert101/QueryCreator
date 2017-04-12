@@ -1,0 +1,5 @@
+[dp].[GolfCarDetail]
+[ModelDescription]		VARCHAR (255)		NOT NULL
+[FrameNo]		VARCHAR (255)		NOT NULL
+[BatteryUseReferenceNo]		VARCHAR (255)		NOT NULL
+[Kits]		VARCHAR (255)		NOT NULL

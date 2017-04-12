@@ -1,0 +1,4 @@
+[dp].[AccountCheque]
+[PaymentDate]		DATETIME		NOT NULL
+[Reference]		VARCHAR (255)		NOT NULL
+[Value]		DECIMAL		NOT NULL

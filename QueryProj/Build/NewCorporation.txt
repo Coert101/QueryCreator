@@ -1,0 +1,6 @@
+[dp].[Corporation]
+[RegistrationNumber]		VARCHAR (255)		NOT NULL
+[RegisteredName]		VARCHAR (255)		NOT NULL
+[TradingName]		VARCHAR (255)		NOT NULL
+[BranchName]		VARCHAR (255)		NOT NULL
+[BusinessActivity]		VARCHAR (255)		NOT NULL

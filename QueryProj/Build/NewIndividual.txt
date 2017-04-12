@@ -1,0 +1,6 @@
+[dp].[Individual]
+[IdNumber]		VARCHAR (255)		NOT NULL
+[Surname]		VARCHAR (255)		NOT NULL
+[FirstName]		VARCHAR (255)		NOT NULL
+[Title]		VARCHAR (255)		NOT NULL
+[Occupation]		VARCHAR (255)		NOT NULL

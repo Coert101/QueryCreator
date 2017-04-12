@@ -1,0 +1,3 @@
+[dp].[ProductDetail]
+[WarrantyAccountNumber]		VARCHAR (255)		NOT NULL
+[EngineSerialNumber]		VARCHAR (255)		NOT NULL

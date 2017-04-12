@@ -1,0 +1,7 @@
+[dp].[OwnerDetail]
+[OwnerCode]		VARCHAR (255)		NOT NULL
+[ContactPersonName]		VARCHAR (255)		NOT NULL
+[ContactPersonTelephoneNumber]		VARCHAR (255)		NOT NULL
+[ContactPersonCellphoneNumber]		VARCHAR (255)		NOT NULL
+[ContactPersonEmailAddress]		VARCHAR (255)		NOT NULL
+[HasGivenConsentForCommunication]		BIT		NOT NULL

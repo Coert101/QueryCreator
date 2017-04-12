@@ -1,0 +1,3 @@
+[dp].[CreditLimitCheck]
+[CreditLimitExceeded]		BIT		NOT NULL
+[Message]		VARCHAR (255)		NOT NULL
