@@ -25,7 +25,7 @@ class QueryBuilder:
                                 if (valCount == 2):
                                     tableName = tableName.split(' ', 2)[2]
                                     newFile = open(newName, "a")
-                                    newFile.write(line)
+                                    newFile.write(tableName)
 
     def dir_builder(dirFrom, dirTo):
         for f in listdir(dirFrom) :
