@@ -1,6 +1,6 @@
 import os
 from os import listdir
-
+import SharedFunctionality
 from app import app
 from flask import request
 
@@ -8,19 +8,6 @@ import time
 
 
 class QueryBuilder:
-    known_types = ["string", "int", "double", "decimal", "bool", "DateTime"]
-    type_equivalent = ["VARCHAR (255)", "INT", "DECIMAL", "DECIMAL", "BIT", "DATETIME"]
-
-
-    def extract_parameter(typeName, paramLine):
-        paramLine = paramLine.split(" ")
-
-        paramName = "["+paramLine[paramLine.index(typeName)+1]+"]"
-
-        typeName = QueryBuilder.type_equivalent[ QueryBuilder.known_types.index(typeName) ]
-
-        # how do we determine whether it is nullable?
-        return '\t' + paramName + ' ' + typeName + " NOT NULL,"
 
     def read_file(dir, dirTo, fileName, dbName):
 
@@ -37,12 +24,12 @@ class QueryBuilder:
 
         for line in file:
 
-            if QueryBuilder.get_usable_line(line) is True:
+            if SharedFunctionality.SharedFunctionality.get_usable_line(line) is True:
 
                 if ("class" in line.lower()):
                     modelClass = True
                     tableName = line.strip()
-                    tableName = QueryBuilder.remove_parent_classes(tableName)
+                    tableName = SharedFunctionality.SharedFunctionality.remove_parent_classes(tableName)
 
                     stringCount = tableName.count(' ')
                     newFile = open(newName, "a")
@@ -63,7 +50,7 @@ class QueryBuilder:
                     typeLine = False
                 if typeLine is not False:
                     newFile = open(newName, "a")
-                    newFile.write("\n"+QueryBuilder.extract_parameter(typeLine, line))
+                    newFile.write("\n"+SharedFunctionality.SharedFunctionality.extract_parameter_create(typeLine, line))
 
         newFile.close()
 
@@ -91,33 +78,6 @@ class QueryBuilder:
     def dir_builder(dirFrom, dirTo, dbName):
         for f in listdir(dirFrom) :
             QueryBuilder.read_file(dirFrom, dirTo, f, dbName)
-
-
-    def remove_parent_classes(stringToFormat):
-        if (':' in stringToFormat):
-            preLength = stringToFormat.find(':') - 1
-            stringToFormat = stringToFormat[:-(len(stringToFormat) - preLength)]
-            stringToFormat = stringToFormat.strip()
-
-        return stringToFormat
-
-    def get_usable_line(currentLine):
-        if ((currentLine.strip() is "")):
-            return False;
-
-        if (('{' in currentLine.lstrip()[0]) or ('}' in currentLine.lstrip()[0])):
-            return False;
-
-        if ("[required" in currentLine.lower()):
-            return False;
-
-        if (("using" in currentLine.lower()) or ("namespace" in currentLine.lower())):
-            return False;
-
-        if ('#' in currentLine.strip()) and ("md" in (currentLine.strip()).lower()):
-            return False;
-
-        return True;
 
     @app.route("/stop/<test>")
     def test(test):
