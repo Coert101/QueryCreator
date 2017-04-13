@@ -30,13 +30,11 @@ class PreAdapter:
         for line in file:
 
             if "known_types = [" in line:
-                string_config = (line.strip())[:-1]
-                string_config = "    " + string_config + str_known_types + '\n';
+                string_config = "    " + (line.strip())[:-1] + str_known_types + '\n'
                 line = string_config
 
             if "type_equivalent = [" in line:
-                type_eq_string = (line.strip())[:-1]
-                type_eq_string = "    " + type_eq_string + str_type_equivalent + '\n';
+                type_eq_string = "    " + (line.strip())[:-1] + str_type_equivalent + '\n';
                 line = type_eq_string
 
             file2 = open(temp_file_name, "a")

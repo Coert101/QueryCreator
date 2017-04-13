@@ -26,3 +26,5 @@ QueryProj/.idea/QueryProj.iml
 QueryProj/Insert
 QueryProj/Build
 QueryProj/__pycache__
+*.pyc
+*.xml
