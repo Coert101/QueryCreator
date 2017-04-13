@@ -78,6 +78,17 @@ class QueryBuilder:
                 botStr = bottomLine[:-1]
                 newFile.close()
 
+                if os.path.exists(newName):
+                    os.remove(newName)
+
+                newFile = open(newName, "a")
+                newFile.writelines("%s" % item for item in topLines)
+                newFile.write(botStr)
+                newFile.close()
+
+        newFile = open(newName, "a")
+        newFile.write("\n)\n\nGO")
+
 
     def dir_builder(dirFrom, dirTo, dbName):
         for f in listdir(dirFrom) :
