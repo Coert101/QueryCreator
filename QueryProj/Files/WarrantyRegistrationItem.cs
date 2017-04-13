@@ -3,6 +3,10 @@ using Yamaha.Business.Model.Base;
 using Yamaha.Business.Model.Inventory;
 using Yamaha.Business.Model.Warranty.Product;
 
+//#PK=LineNumber,DateOfSale
+//#FK=Owner,SerialDetail,ExpiryDate #REF=WarrantyRegistration #NAME=Owner
+//#FK=Owner2,SerialDetail2,ExpiryDate2 #REF=WarrantyRegistration #NAME=Owner2
+
 namespace Yamaha.Business.Model.Warranty
 {
     public class WarrantyRegistrationItem : BaseModel

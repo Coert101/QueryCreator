@@ -14,6 +14,22 @@ class QueryBuilder:
     def extract_primary_keys(line):
         return line[line.index("=")+1:].strip().split(",")
 
+    def extract_foreign_keys(line):
+        foreignKey = []
+        temp = line[line.index("NAME=")+len("NAME="):]
+        length = len(temp) if temp.find("#") == -1 else temp.index("#")
+        foreignKey.append(temp[:length].strip())
+
+        temp = line[line.index("REF=")+len("REF="):]
+        length = len(temp) if temp.find("#") == -1 else temp.index("#")
+        foreignKey.append(temp[:length].strip())
+
+        temp = line[line.index("FK=")+len("FK="):]
+        length = len(temp) if temp.find("#") == -1 else temp.index("#")
+        foreignKey.append(temp[:length].strip())
+
+        return foreignKey
+
 
     def read_file(dir, dirTo, fileName, dbName):
 
@@ -22,6 +38,7 @@ class QueryBuilder:
         newName = dirTo + "/" + fileName[:-3] + ".sql"
         modelClass = False
         primaryKeys = []
+        foreignKeys = []
 
         if os.path.exists(newName):
             os.remove(newName)
@@ -33,6 +50,8 @@ class QueryBuilder:
 
             if "//#pk" in line.lower():
                 primaryKeys = QueryBuilder.extract_primary_keys(line)
+            elif "//#fk" in line.lower():
+                foreignKeys.append(QueryBuilder.extract_foreign_keys(line))
             elif SharedFunctionality.SharedFunctionality.get_usable_line(line) is True:
 
                 if ("class" in line.lower()):
@@ -59,7 +78,7 @@ class QueryBuilder:
                     typeLine = False
                 if typeLine is not False:
                     newFile = open(newName, "a")
-                    newFile.write("\n"+SharedFunctionality.SharedFunctionality.extract_parameter(typeLine, line))
+                    newFile.write("\n"+SharedFunctionality.SharedFunctionality.extract_parameter_create(typeLine, line))
 
         newFile.close()
 
@@ -87,6 +106,17 @@ class QueryBuilder:
             for pk in primaryKeys[:-1]:
                 newFile.write("["+pk+"] ASC, ")
             newFile.write("["+primaryKeys[-1]+"] ASC)")
+
+        if len(foreignKeys) > 0:
+            for fk in foreignKeys:
+                newFile.write(", \n\tCONSTRAINT [FK_"+fk[0]+"] FOREIGN KEY (")
+                fields = fk[2].split(",")
+                for item in fields[:-1]:
+                    newFile.write("[" + item + "], ")
+                newFile.write("[" + fields[-1] + "]) REFERENCES [dp].[" + fk[1] + "] (")
+                for item in fields[:-1]:
+                    newFile.write("[" + item + "], ")
+                newFile.write("[" + fields[-1] + "])")
 
         newFile.write("\n)\n\nGO")
 
