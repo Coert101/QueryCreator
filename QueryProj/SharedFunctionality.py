@@ -33,15 +33,19 @@ class SharedFunctionality:
 
     def extract_parameter(typeName, paramLine):
         paramLine = paramLine.split(" ")
+
         paramName = "[" + paramLine[paramLine.index(typeName) + 1] + "]"
 
         return paramName
 
-    def extract_parameter_create(typeName, paramLine):
+    def extract_parameter_create(typeName, paramLine, lengthModifier):
         #paramLine = paramLine.split(" ")
-        paramName = SharedFunctionality.extract_parameter(typeName, paramLine)
 
+        paramName = SharedFunctionality.extract_parameter(typeName, paramLine)
         typeName = SharedFunctionality.type_equivalent[ SharedFunctionality.known_types.index(typeName) ]
+
+        if "varchar" in typeName.lower() and lengthModifier is not None:
+            typeName = "VARCHAR (" + str(lengthModifier) + ")"
 
         # how do we determine whether it is nullable?
         return '\t' + paramName + ' ' + typeName + " NOT NULL,"

@@ -39,6 +39,7 @@ class QueryBuilder:
         modelClass = False
         primaryKeys = []
         foreignKeys = []
+        lengthModifier = None
 
         if os.path.exists(newName):
             os.remove(newName)
@@ -52,6 +53,8 @@ class QueryBuilder:
                 primaryKeys = QueryBuilder.extract_primary_keys(line)
             elif "//#fk" in line.lower():
                 foreignKeys.append(QueryBuilder.extract_foreign_keys(line))
+            elif "//#maxlength" in line.lower():
+                lengthModifier = int(line[line.index("MAXLENGTH=")+len("MAXLENGTH="):].strip())
             elif SharedFunctionality.SharedFunctionality.get_usable_line(line) is True:
 
                 if ("class" in line.lower()):
@@ -78,7 +81,8 @@ class QueryBuilder:
                     typeLine = False
                 if typeLine is not False:
                     newFile = open(newName, "a")
-                    newFile.write("\n"+SharedFunctionality.SharedFunctionality.extract_parameter_create(typeLine, line))
+                    newFile.write("\n"+SharedFunctionality.SharedFunctionality.extract_parameter_create(typeLine, line, lengthModifier))
+                    lengthModifier = None
 
         newFile.close()
 
