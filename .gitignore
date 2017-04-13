@@ -17,3 +17,5 @@ QueryProj/.idea/QueryProj.iml
 *.xml
 *.xml
 *.xml
+*.xml
+*.pyc

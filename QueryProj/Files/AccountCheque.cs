@@ -1,4 +1,7 @@
-﻿using System;
+﻿//#PK=PaymentDate,Reference
+//#MD=5
+
+using System;
 
 namespace Yamaha.Business.Model.Accounts
 {

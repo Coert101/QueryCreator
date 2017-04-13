@@ -36,36 +36,34 @@ class QueryBuilder:
         newFile.write("USE [" + dbName + "]\nGO\n\nSET ANSI_NULLS ON\nGO\n\nSET QUOTED_IDENTIFIER ON\nGO\n\n")
 
         for line in file:
-            if (line.strip() != ""):
-                if (("using" not in line.lower()) and ("namespace" not in line.lower())):
-                    if (('{' not in line.lstrip()[0]) and ('}' not in line.lstrip()[0])):
-                        if ("[required" not in line.lower()):
 
-                            if ("class" in line.lower()):
-                                modelClass = True
-                                tableName = line.strip()
-                                tableName = QueryBuilder.remove_parent_classes(tableName)
+            if QueryBuilder.get_usable_line(line) is True:
 
-                                stringCount = tableName.count(' ')
-                                newFile = open(newName, "a")
+                if ("class" in line.lower()):
+                    modelClass = True
+                    tableName = line.strip()
+                    tableName = QueryBuilder.remove_parent_classes(tableName)
 
-                                if (stringCount == 2):
-                                    tableName = tableName.split(' ', 2)[2]
-                                elif (stringCount > 2):
-                                    tableName = tableName.split(' ', 3)[3]
+                    stringCount = tableName.count(' ')
+                    newFile = open(newName, "a")
 
-                                newFile.write("CREATE TABLE [dp].[" + tableName + "] (")
+                    if (stringCount == 2):
+                        tableName = tableName.split(' ', 2)[2]
+                    elif (stringCount > 2):
+                        tableName = tableName.split(' ', 3)[3]
+
+                    newFile.write("CREATE TABLE [dp].[" + tableName + "] (")
 
 
-                            typeLine = next((typeName for typeName in QueryBuilder.known_types if typeName in line.split(" ")), False)
-                            # ignore calculated fields. We assume that any basic property will have the closing
-                            # bracket on the same line we further assume that a line using arrow notation (=>) is
-                            # also calculating
-                            if "}" not in line or "=>" in line:
-                                typeLine = False
-                            if typeLine is not False:
-                                newFile = open(newName, "a")
-                                newFile.write("\n"+QueryBuilder.extract_parameter(typeLine, line))
+                typeLine = next((typeName for typeName in QueryBuilder.known_types if typeName in line.split(" ")), False)
+                # ignore calculated fields. We assume that any basic property will have the closing
+                # bracket on the same line we further assume that a line using arrow notation (=>) is
+                # also calculating
+                if "}" not in line or "=>" in line:
+                    typeLine = False
+                if typeLine is not False:
+                    newFile = open(newName, "a")
+                    newFile.write("\n"+QueryBuilder.extract_parameter(typeLine, line))
 
         newFile.close()
 
@@ -103,7 +101,23 @@ class QueryBuilder:
 
         return stringToFormat
 
+    def get_usable_line(currentLine):
+        if ((currentLine.strip() is "")):
+            return False;
 
+        if (('{' in currentLine.lstrip()[0]) or ('}' in currentLine.lstrip()[0])):
+            return False;
+
+        if ("[required" in currentLine.lower()):
+            return False;
+
+        if (("using" in currentLine.lower()) or ("namespace" in currentLine.lower())):
+            return False;
+
+        if ('#' in currentLine.strip()) and ("md" in (currentLine.strip()).lower()):
+            return False;
+
+        return True;
 
     @app.route("/stop/<test>")
     def test(test):
