@@ -1,4 +1,7 @@
-﻿using System;
+﻿//#PK=PaymentDate,Reference
+//#MD=7
+
+using System;
 using System.Collections.Generic;
 using Yamaha.Business.Model.Branches;
 

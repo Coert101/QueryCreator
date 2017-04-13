@@ -42,7 +42,7 @@ class QueryBuilder:
                     newFile.write("CREATE TABLE [dp].[" + tableName + "] (")
 
 
-                typeLine = next((typeName for typeName in QueryBuilder.known_types if typeName in line.split(" ")), False)
+                typeLine = next((typeName for typeName in SharedFunctionality.SharedFunctionality.known_types if typeName in line.split(" ")), False)
                 # ignore calculated fields. We assume that any basic property will have the closing
                 # bracket on the same line we further assume that a line using arrow notation (=>) is
                 # also calculating

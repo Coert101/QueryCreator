@@ -1,4 +1,7 @@
-﻿using Yamaha.Business.Model.Geography;
+﻿//#PK=PaymentDate,Reference
+//#MD=37
+
+using Yamaha.Business.Model.Geography;
 
 namespace Yamaha.Business.Model.Warranty.Owner
 {

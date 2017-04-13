@@ -1,0 +1,15 @@
+CustomerAccount:string
+CustomerSubaccount:string
+Branch:string
+DocumentType:string
+Country:string
+Province:string
+CorporationType:string
+AgeGroup:string
+Address:string
+EntityType:string
+ProductDetailType:string
+YesNoQuestion:bool
+ProductClass:string
+OwnerDetail:string
+WarrantyStatus:string
