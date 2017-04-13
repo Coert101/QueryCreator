@@ -1,51 +1,51 @@
 import os
 from os import listdir
 
-import SharedFunctionality
+from SharedFunctionality import SharedFunctionality
 from app import app
 from flask import request
-
 
 import time
 
 
 class QueryBuilder:
-
+    @staticmethod
     def extract_primary_keys(line):
-        return line[line.index("=")+1:].strip().split(",")
+        return line[line.index("=") + 1:].strip().split(",")
 
+    @staticmethod
     def extract_foreign_keys(line):
-        foreignKey = []
-        temp = line[line.index("NAME=")+len("NAME="):]
+        foreign_key = []
+        temp = line[line.index("NAME=") + len("NAME="):]
         length = len(temp) if temp.find("#") == -1 else temp.index("#")
-        foreignKey.append(temp[:length].strip())
+        foreign_key.append(temp[:length].strip())
 
-        temp = line[line.index("REF=")+len("REF="):]
+        temp = line[line.index("REF=") + len("REF="):]
         length = len(temp) if temp.find("#") == -1 else temp.index("#")
-        foreignKey.append(temp[:length].strip())
+        foreign_key.append(temp[:length].strip())
 
-        temp = line[line.index("FK=")+len("FK="):]
+        temp = line[line.index("FK=") + len("FK="):]
         length = len(temp) if temp.find("#") == -1 else temp.index("#")
-        foreignKey.append(temp[:length].strip())
+        foreign_key.append(temp[:length].strip())
 
-        return foreignKey
+        return foreign_key
 
+    @staticmethod
+    def read_file(dir_name, dirTo, file_name, db_name):
 
-    def read_file(dir, dirTo, fileName, dbName):
-
-        newName = dirTo + "/New" + fileName[:-3] + ".txt"
-        file = open(dir +"/"+ fileName,"r")
-        newName = dirTo + "/" + fileName[:-3] + ".sql"
-        modelClass = False
+        global table_name
+        file = open(dir_name + "/" + file_name, "r")
+        new_name = dirTo + "/" + file_name[:-3] + ".sql"
+        model_class = False
         primaryKeys = []
         foreignKeys = []
         lengthModifier = None
 
-        if os.path.exists(newName):
-            os.remove(newName)
+        if os.path.exists(new_name):
+            os.remove(new_name)
 
-        newFile = open(newName, "a")
-        newFile.write("USE [" + dbName + "]\nGO\n\nSET ANSI_NULLS ON\nGO\n\nSET QUOTED_IDENTIFIER ON\nGO\n\n")
+        new_file = open(new_name, "a")
+        new_file.write("USE [" + db_name + "]\nGO\n\nSET ANSI_NULLS ON\nGO\n\nSET QUOTED_IDENTIFIER ON\nGO\n\n")
 
         for line in file:
 
@@ -54,104 +54,99 @@ class QueryBuilder:
             elif "//#fk" in line.lower():
                 foreignKeys.append(QueryBuilder.extract_foreign_keys(line))
             elif "//#maxlength" in line.lower():
-                lengthModifier = int(line[line.index("MAXLENGTH=")+len("MAXLENGTH="):].strip())
-            elif SharedFunctionality.SharedFunctionality.get_usable_line(line) is True:
+                lengthModifier = int(line[line.index("MAXLENGTH=") + len("MAXLENGTH="):].strip())
+            elif SharedFunctionality.get_usable_line(line) is True:
 
-                if ("class" in line.lower()):
-                    modelClass = True
-                    tableName = line.strip()
-                    tableName = SharedFunctionality.SharedFunctionality.remove_parent_classes(tableName)
+                if "class" in line.lower():
+                    model_class = True
+                    table_name = line.strip()
+                    table_name = SharedFunctionality.remove_parent_classes(table_name)
 
-                    stringCount = tableName.count(' ')
-                    newFile = open(newName, "a")
+                    stringCount = table_name.count(' ')
+                    new_file = open(new_name, "a")
 
                     if (stringCount == 2):
-                        tableName = tableName.split(' ', 2)[2]
+                        table_name = table_name.split(' ', 2)[2]
                     elif (stringCount > 2):
-                        tableName = tableName.split(' ', 3)[3]
+                        table_name = table_name.split(' ', 3)[3]
 
-                    newFile.write("CREATE TABLE [dp].[" + tableName + "] (")
+                    new_file.write("CREATE TABLE [dp].[" + table_name + "] (")
 
-
-                typeLine = next((typeName for typeName in SharedFunctionality.SharedFunctionality.known_types if typeName in line.split(" ")), False)
+                type_line = next(
+                    (typeName for typeName in SharedFunctionality.known_types if typeName in line.split(" ")), False)
                 # ignore calculated fields. We assume that any basic property will have the closing
                 # bracket on the same line we further assume that a line using arrow notation (=>) is
                 # also calculating
                 if "}" not in line or "=>" in line:
-                    typeLine = False
-                if typeLine is not False:
-                    newFile = open(newName, "a")
-                    newFile.write("\n"+SharedFunctionality.SharedFunctionality.extract_parameter_create(typeLine, line, lengthModifier))
+                    type_line = False
+                if type_line is not False:
+                    new_file = open(new_name, "a")
+                    new_file.write("\n" + SharedFunctionality.extract_parameter_create(type_line, line, lengthModifier))
                     lengthModifier = None
 
-        newFile.close()
+        new_file.close()
 
-        if (modelClass == True):
-            newFile = open(newName, "r")
-            lines = newFile.readlines()
-            topLines = lines[:-1]
-            bottomLine = (lines[len(lines)-1:])[0]
-            if "," in bottomLine:
-                botStr = bottomLine[:-1]
-                newFile.close()
+        if model_class:
+            new_file = open(new_name, "r")
+            lines = new_file.readlines()
+            top_lines = lines[:-1]
+            bottom_line = (lines[len(lines) - 1:])[0]
+            if "," in bottom_line:
+                botStr = bottom_line[:-1]
+                new_file.close()
 
-                if os.path.exists(newName):
-                    os.remove(newName)
+                if os.path.exists(new_name):
+                    os.remove(new_name)
 
-                newFile = open(newName, "a")
-                newFile.writelines("%s" % item for item in topLines)
-                newFile.write(botStr)
-                newFile.close()
+                new_file = open(new_name, "a")
+                new_file.writelines("%s" % item for item in top_lines)
+                new_file.write(botStr)
+                new_file.close()
 
-        newFile = open(newName, "a")
+        new_file = open(new_name, "a")
 
         if len(primaryKeys) > 0:
-            newFile.write(", \n\tCONSTRAINT [PK_"+tableName+"] PRIMARY KEY CLUSTERED (")
+            new_file.write(", \n\tCONSTRAINT [PK_" + table_name + "] PRIMARY KEY CLUSTERED (")
             for pk in primaryKeys[:-1]:
-                newFile.write("["+pk+"] ASC, ")
-            newFile.write("["+primaryKeys[-1]+"] ASC)")
+                new_file.write("[" + pk + "] ASC, ")
+            new_file.write("[" + primaryKeys[-1] + "] ASC)")
 
         if len(foreignKeys) > 0:
             for fk in foreignKeys:
-                newFile.write(", \n\tCONSTRAINT [FK_"+fk[0]+"] FOREIGN KEY (")
+                new_file.write(", \n\tCONSTRAINT [FK_" + fk[0] + "] FOREIGN KEY (")
                 fields = fk[2].split(",")
                 for item in fields[:-1]:
-                    newFile.write("[" + item + "], ")
-                newFile.write("[" + fields[-1] + "]) REFERENCES [dp].[" + fk[1] + "] (")
+                    new_file.write("[" + item + "], ")
+                new_file.write("[" + fields[-1] + "]) REFERENCES [dp].[" + fk[1] + "] (")
                 for item in fields[:-1]:
-                    newFile.write("[" + item + "], ")
-                newFile.write("[" + fields[-1] + "])")
+                    new_file.write("[" + item + "], ")
+                new_file.write("[" + fields[-1] + "])")
 
-        newFile.write("\n)\n\nGO")
+        new_file.write("\n)\n\nGO")
 
+    @staticmethod
+    def dir_builder(dir_from, dir_to, db_name):
+        for f in listdir(dir_from):
+            QueryBuilder.read_file(dir_from, dir_to, f, db_name)
 
-    def dir_builder(dirFrom, dirTo, dbName):
-        for f in listdir(dirFrom) :
-            QueryBuilder.read_file(dirFrom, dirTo, f, dbName)
+    @staticmethod
+    def get_usable_line(current_line):
+        if current_line.strip() is "":
+            return False
 
+        if ('{' in current_line.lstrip()[0]) or ('}' in current_line.lstrip()[0]):
+            return False
 
-    def get_usable_line(currentLine):
-        if ((currentLine.strip() is "")):
-            return False;
+        if "[required" in current_line.lower():
+            return False
 
-        if (('{' in currentLine.lstrip()[0]) or ('}' in currentLine.lstrip()[0])):
-            return False;
+        if ("using" in current_line.lower()) or ("namespace" in current_line.lower()):
+            return False
 
-        if ("[required" in currentLine.lower()):
-            return False;
+        if ('#' in current_line.strip()) and ("md" in (current_line.strip()).lower()):
+            return False
 
-        if (("using" in currentLine.lower()) or ("namespace" in currentLine.lower())):
-            return False;
-
-        if ('#' in currentLine.strip()) and ("md" in (currentLine.strip()).lower()):
-            return False;
-
-        return True;
-
-
-    @app.route("/stop/<test>")
-    def test(test):
-        return "<h1>Button clicked</h1>"
+        return True
 
 
 @app.route("/build", methods=["POST"])

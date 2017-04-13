@@ -1,92 +1,93 @@
 import os
 from os import listdir
-import app as app
-import time
-import SharedFunctionality
+from SharedFunctionality import SharedFunctionality
+
 
 class SQLMockFactory:
+    @staticmethod
+    def dir_builder(dir_from, dir_to, file_name, db_name):
 
-    def dir_builder(dirFrom, dirTo, fileName, dbName):
+        insert_name = dir_to + file_name + ".sql"
 
-        insertName = dirTo + fileName + ".sql"
+        if os.path.exists(insert_name):
+            os.remove(insert_name)
 
-        if os.path.exists(insertName):
-            os.remove(insertName)
+        new_file = open(insert_name, "a")
+        new_file.write("USE [" + db_name + "]\nGO\n")
+        new_file.close()
 
-        newFile = open(insertName, "a")
-        newFile.write("USE [" + dbName + "]\nGO\n")
-        newFile.close()
+        for f in listdir(dir_from):
+            SQLMockFactory.read_file(dir_from, dir_to, f, insert_name, db_name)
 
-        for f in listdir(dirFrom):
-            SQLMockFactory.read_file(dirFrom, dirTo, f, insertName, dbName)
+    @staticmethod
+    def read_file(dir_name, file_name, insert_queries_file):
 
+        file = open(dir_name + file_name, "r")
+        iteration_amount = 0
 
-    def read_file(dir, dirTo, fileName, insertQueriesFile, dbName):
+        for line_check in file:
+            if iteration_amount is 0:
+                iteration_amount = SQLMockFactory.get_mock_amount(line_check)
 
-        file = open(dir + fileName, "r")
-        iterationAmount = 0
+        # This should be fixed in another manner
+        if iteration_amount is 0:
+            iteration_amount = 1
 
-        for lineCheck in file:
-            if iterationAmount is 0:
-                iterationAmount = SQLMockFactory.get_mock_amount(lineCheck)
-
-        ####This should be fixed in another manner########################
-        if iterationAmount is 0:
-            iterationAmount = 1
-        ##################################################################
-
-        for x in range (0,iterationAmount):
+        for x in range(0, iteration_amount):
 
             file.close()
-            file = open(dir + fileName, "r")
-            modelClass = False
-            stringInsert = "INSERT"
+            file = open(dir_name + file_name, "r")
+            model_class = False
+            string_insert = "INSERT"
 
             for line in file:
 
-                if SharedFunctionality.SharedFunctionality.get_usable_line(line) is True:
+                if SharedFunctionality.get_usable_line(line) is True:
 
-                    if ("class" in line.lower()):
-                        modelClass = True
-                        tableName = line.strip()
-                        tableName = SharedFunctionality.SharedFunctionality.remove_parent_classes(tableName)
+                    if "class" in line.lower():
+                        model_class = True
+                        table_name = line.strip()
+                        table_name = SharedFunctionality.remove_parent_classes(table_name)
 
-                        stringCount = tableName.count(' ')
+                        string_count = table_name.count(' ')
 
-                        if (stringCount == 2):
-                            tableName = tableName.split(' ', 2)[2]
-                        elif (stringCount > 2):
-                            tableName = tableName.split(' ', 3)[3]
+                        if string_count == 2:
+                            table_name = table_name.split(' ', 2)[2]
+                        elif string_count > 2:
+                            table_name = table_name.split(' ', 3)[3]
 
-                        stringInsert = stringInsert + " [dp].[" + tableName + "] ("
+                        string_insert = string_insert + " [dp].[" + table_name + "] ("
 
-                    typeLine = next(
-                        (typeName for typeName in SharedFunctionality.SharedFunctionality.known_types if typeName in line.split(" ")),
+                    type_line = next(
+                        (typeName for typeName in SharedFunctionality.known_types if
+                         typeName in line.split(" ")),
                         False)
                     if "}" not in line or "=>" in line:
-                        typeLine = False
-                    if typeLine is not False:
-                        stringInsert = stringInsert + SharedFunctionality.SharedFunctionality.extract_parameter(typeLine, line) + ','
+                        type_line = False
+                    if type_line is not False:
+                        string_insert = string_insert + SharedFunctionality.extract_parameter(
+                            type_line, line) + ','
 
-            if (modelClass == True):
-                stringInsert = stringInsert[:-1]
-                stringInsert = stringInsert + ") VALUES ()\nGO"
+            if model_class:
+                string_insert = string_insert[:-1]
+                string_insert = string_insert + ") VALUES ()\nGO"
 
-                insertFile = open(insertQueriesFile, "a")
-                insertFile.write(stringInsert + '\n')
+                insert_file = open(insert_queries_file, "a")
+                insert_file.write(string_insert + '\n')
 
-            #Go on here
+            # Go on here
 
             file.close()
 
-    def get_mock_amount(lineToProcess):
-        line = lineToProcess.strip()
+    @staticmethod
+    def get_mock_amount(line_to_process):
+        line = line_to_process.strip()
 
         if ('#' in line) and ("md" in line.lower()):
-
-            equalIndex = len(line) - ((line).find('=') + 1)
-            return int((line)[-equalIndex:])
+            equal_index = len(line) - (line.find('=') + 1)
+            return int(line[-equal_index:])
 
         return 0
+
 
 SQLMockFactory.dir_builder("Files/", "Insert/", "Test", "YamahaEOHIntegration")
