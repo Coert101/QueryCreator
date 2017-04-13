@@ -22,12 +22,17 @@ class QueryBuilder:
         # how do we determine whether it is nullable?
         return '\t' + paramName + ' ' + typeName + " NOT NULL,"
 
+    def extract_primary_keys(line):
+        return line[line.index("=")+1:].strip().split(",")
+
+
     def read_file(dir, dirTo, fileName, dbName):
 
         newName = dirTo + "/New" + fileName[:-3] + ".txt"
         file = open(dir +"/"+ fileName,"r")
         newName = dirTo + "/" + fileName[:-3] + ".sql"
         modelClass = False
+        primaryKeys = []
 
         if os.path.exists(newName):
             os.remove(newName)
@@ -37,7 +42,9 @@ class QueryBuilder:
 
         for line in file:
 
-            if QueryBuilder.get_usable_line(line) is True:
+            if "//#pk" in line.lower():
+                primaryKeys = QueryBuilder.extract_primary_keys(line)
+            elif QueryBuilder.get_usable_line(line) is True:
 
                 if ("class" in line.lower()):
                     modelClass = True
@@ -85,6 +92,13 @@ class QueryBuilder:
                 newFile.close()
 
         newFile = open(newName, "a")
+
+        if len(primaryKeys) > 0:
+            newFile.write(", \n\tCONSTRAINT [PK_"+tableName+"] PRIMARY KEY CLUSTERED (")
+            for pk in primaryKeys[:-1]:
+                newFile.write("["+pk+"] ASC, ")
+            newFile.write("["+primaryKeys[-1]+"] ASC)")
+
         newFile.write("\n)\n\nGO")
 
 
@@ -118,6 +132,7 @@ class QueryBuilder:
             return False;
 
         return True;
+
 
     @app.route("/stop/<test>")
     def test(test):
