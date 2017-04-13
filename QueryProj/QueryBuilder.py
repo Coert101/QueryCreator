@@ -1,26 +1,15 @@
 import os
 from os import listdir
 
+import SharedFunctionality
 from app import app
 from flask import request
+
 
 import time
 
 
 class QueryBuilder:
-    known_types = ["string", "int", "double", "decimal", "bool", "DateTime"]
-    type_equivalent = ["VARCHAR (255)", "INT", "DECIMAL", "DECIMAL", "BIT", "DATETIME"]
-
-
-    def extract_parameter(typeName, paramLine):
-        paramLine = paramLine.split(" ")
-
-        paramName = "["+paramLine[paramLine.index(typeName)+1]+"]"
-
-        typeName = QueryBuilder.type_equivalent[ QueryBuilder.known_types.index(typeName) ]
-
-        # how do we determine whether it is nullable?
-        return '\t' + paramName + ' ' + typeName + " NOT NULL,"
 
     def extract_primary_keys(line):
         return line[line.index("=")+1:].strip().split(",")
@@ -44,12 +33,12 @@ class QueryBuilder:
 
             if "//#pk" in line.lower():
                 primaryKeys = QueryBuilder.extract_primary_keys(line)
-            elif QueryBuilder.get_usable_line(line) is True:
+            elif SharedFunctionality.SharedFunctionality.get_usable_line(line) is True:
 
                 if ("class" in line.lower()):
                     modelClass = True
                     tableName = line.strip()
-                    tableName = QueryBuilder.remove_parent_classes(tableName)
+                    tableName = SharedFunctionality.SharedFunctionality.remove_parent_classes(tableName)
 
                     stringCount = tableName.count(' ')
                     newFile = open(newName, "a")
@@ -62,7 +51,7 @@ class QueryBuilder:
                     newFile.write("CREATE TABLE [dp].[" + tableName + "] (")
 
 
-                typeLine = next((typeName for typeName in QueryBuilder.known_types if typeName in line.split(" ")), False)
+                typeLine = next((typeName for typeName in SharedFunctionality.SharedFunctionality.known_types if typeName in line.split(" ")), False)
                 # ignore calculated fields. We assume that any basic property will have the closing
                 # bracket on the same line we further assume that a line using arrow notation (=>) is
                 # also calculating
@@ -70,7 +59,7 @@ class QueryBuilder:
                     typeLine = False
                 if typeLine is not False:
                     newFile = open(newName, "a")
-                    newFile.write("\n"+QueryBuilder.extract_parameter(typeLine, line))
+                    newFile.write("\n"+SharedFunctionality.SharedFunctionality.extract_parameter(typeLine, line))
 
         newFile.close()
 
@@ -106,14 +95,6 @@ class QueryBuilder:
         for f in listdir(dirFrom) :
             QueryBuilder.read_file(dirFrom, dirTo, f, dbName)
 
-
-    def remove_parent_classes(stringToFormat):
-        if (':' in stringToFormat):
-            preLength = stringToFormat.find(':') - 1
-            stringToFormat = stringToFormat[:-(len(stringToFormat) - preLength)]
-            stringToFormat = stringToFormat.strip()
-
-        return stringToFormat
 
     def get_usable_line(currentLine):
         if ((currentLine.strip() is "")):
