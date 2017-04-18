@@ -1,5 +1,4 @@
 import time
-from QueryBuilder import QueryBuilder
 from PreAdapter import PreAdapter
 
 class MasterClass:
@@ -9,10 +8,11 @@ class MasterClass:
         startTime = time.time()
         PreAdapter.reconfigure_file(file_name)
         print("Elapsed Time: " + str(time.time() - startTime) + " seconds")
-        print("Done Creating Tables...")
+        print("Done Reconfiguring Parameters...")
 
     @staticmethod
     def create_tables_sql(dir_from, dir_to, dbName):
+        from QueryBuilder import QueryBuilder
         start_time = time.time()
         QueryBuilder.dir_builder(dir_from, dir_to, dbName)
         print("Elapsed Time: " + str(time.time() - start_time) + " seconds")
