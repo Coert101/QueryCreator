@@ -42,6 +42,13 @@ class SharedFunctionality:
 
         return paramName
 
+    def extract_parameter_for_csharp(typeName, paramLine):
+        paramLine = paramLine.split(" ")
+
+        paramName = paramLine[paramLine.index(typeName) + 1]
+
+        return paramName
+
     def extract_parameter_create(typeName, paramLine, lengthModifier):
 
         paramName = SharedFunctionality.extract_parameter(typeName, paramLine)
@@ -65,6 +72,9 @@ class SharedFunctionality:
         typeName = SharedFunctionality.type_equivalent[SharedFunctionality.known_types.index(data_type)]
         return SharedFunctionality.data_for_type(typeName)
 
+    def generate_mock_data_for_csharp(data_type):
+        return SharedFunctionality.data_for_type_for_csharp(data_type)
+
     @staticmethod
     def data_for_type(type):
         return {
@@ -76,3 +86,28 @@ class SharedFunctionality:
             "DATETIME": "GETDATE()",
         }.get(type, "test data")
 
+        return False
+
+    @staticmethod
+    def data_for_type_for_csharp(type):
+        return {
+            "string": "\"test data\"",
+            "int": randint(0, 100),
+            "decimal": str(decimal.Decimal(random.randrange(10000)) / 100)+"M",
+            "double": str(decimal.Decimal(random.randrange(10000)) / 100)+"M",
+            "bool": False,
+            "DateTime": "DateTime.Now",
+        }.get(type, "null")
+
+        return False
+
+    def get_class_name_from_file(dir_name, file_name):
+        file = open(dir_name + "/" + file_name, "r")
+
+        for line in file:
+            if " class " in line.lower():
+                temp_line = line[line.index(" class ")+len(" class "):]
+                length = temp_line.find("\n") if temp_line.find(" ") == -1 else temp_line.index(" ")
+                return temp_line[:length]
+
+        return False
