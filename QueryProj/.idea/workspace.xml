@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ae31840-57bd-40dd-88a0-7588263b67d0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MasterClass.py" afterPath="$PROJECT_DIR$/MasterClass.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/QueryBuilder.py" afterPath="$PROJECT_DIR$/QueryBuilder.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SQLMockFactory.py" afterPath="$PROJECT_DIR$/SQLMockFactory.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SharedFunctionality.py" afterPath="$PROJECT_DIR$/SharedFunctionality.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +18,8 @@
       <file leaf-file-name="QueryBuilder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/QueryBuilder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+            <state relative-caret-position="88">
+              <caret line="37" column="77" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="77" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -32,8 +30,8 @@
       <file leaf-file-name="SQLMockFactory.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SQLMockFactory.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="35" column="44" lean-forward="false" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
+            <state relative-caret-position="204">
+              <caret line="15" column="53" lean-forward="true" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -41,14 +39,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SharedFunctionality.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SharedFunctionality.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SharedFunctionality.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="50" column="23" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="23" />
+            <state relative-caret-position="102">
+              <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <marker date="1492330384098" expanded="true" signature="60:2555" ph="..." />
               </folding>
             </state>
           </provider>
@@ -64,11 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MasterClass.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MasterClass.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MasterClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+            <state relative-caret-position="136">
+              <caret line="8" column="46" lean-forward="true" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -97,6 +94,7 @@
       <find>line.split(&quot; &quot;))</find>
       <find>fileName</find>
       <find>print</find>
+      <find>insert_queries_file</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -109,11 +107,11 @@
         <option value="$PROJECT_DIR$/QueryCreatorInterface.html" />
         <option value="$PROJECT_DIR$/.idea/CommonFunctions.py" />
         <option value="$PROJECT_DIR$/CommonFunctions.py" />
-        <option value="$PROJECT_DIR$/SQLMockFactory.py" />
         <option value="$PROJECT_DIR$/PreAdapter.py" />
         <option value="$PROJECT_DIR$/MasterClass.py" />
-        <option value="$PROJECT_DIR$/SharedFunctionality.py" />
         <option value="$PROJECT_DIR$/QueryBuilder.py" />
+        <option value="$PROJECT_DIR$/SQLMockFactory.py" />
+        <option value="$PROJECT_DIR$/SharedFunctionality.py" />
       </list>
     </option>
   </component>
@@ -174,7 +172,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.MasterClass">
+  <component name="RunManager" selected="Python.SQLMockFactory">
     <configuration default="false" name="MasterClass" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -338,10 +336,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.MasterClass" />
-        <item index="1" class="java.lang.String" itemvalue="Python.SharedFunctionality" />
-        <item index="2" class="java.lang.String" itemvalue="Python.PreAdapter" />
-        <item index="3" class="java.lang.String" itemvalue="Python.SQLMockFactory" />
+        <item index="0" class="java.lang.String" itemvalue="Python.SQLMockFactory" />
+        <item index="1" class="java.lang.String" itemvalue="Python.MasterClass" />
+        <item index="2" class="java.lang.String" itemvalue="Python.SharedFunctionality" />
+        <item index="3" class="java.lang.String" itemvalue="Python.PreAdapter" />
         <item index="4" class="java.lang.String" itemvalue="Python.run" />
       </list>
     </recent_temporary>
@@ -417,7 +415,6 @@
           <caret line="50" column="23" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="23" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1492330384098" expanded="true" signature="60:2555" ph="..." />
           </folding>
         </state>
       </provider>
@@ -484,7 +481,6 @@
           <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1492330384098" expanded="true" signature="60:2555" ph="..." />
           </folding>
         </state>
       </provider>
@@ -525,7 +521,6 @@
           <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1492330384098" expanded="true" signature="60:2555" ph="..." />
           </folding>
         </state>
       </provider>
@@ -607,7 +602,6 @@
           <caret line="14" column="48" lean-forward="true" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1492330384098" expanded="true" signature="60:2555" ph="..." />
           </folding>
         </state>
       </provider>
@@ -666,7 +660,6 @@
           <caret line="5" column="27" lean-forward="false" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
-            <marker date="1492330384098" expanded="true" signature="60:2555" ph="..." />
           </folding>
         </state>
       </provider>
@@ -722,14 +715,6 @@
     <entry file="file://$PROJECT_DIR$/.idea/CommonFunctions.py" />
     <entry file="file://$PROJECT_DIR$/CommonFunctions.py" />
     <entry file="file://$PROJECT_DIR$/SharedFunctions.py" />
-    <entry file="file://$PROJECT_DIR$/PreAdapter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharmCE2017.1/system/python_stubs/-891437912/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -739,29 +724,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/QueryBuilder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SharedFunctionality.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="50" column="23" lean-forward="false" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <marker date="1492330384098" expanded="true" signature="60:2555" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SQLMockFactory.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="35" column="44" lean-forward="false" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
+        <state relative-caret-position="88">
+          <caret line="37" column="77" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="77" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -770,10 +734,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MasterClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="29" lean-forward="false" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+        <state relative-caret-position="136">
+          <caret line="8" column="46" lean-forward="true" selection-start-line="8" selection-start-column="46" selection-end-line="8" selection-end-column="46" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PreAdapter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SQLMockFactory.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="15" column="53" lean-forward="true" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SharedFunctionality.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>

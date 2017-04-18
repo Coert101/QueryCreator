@@ -28,3 +28,4 @@ QueryProj/Build
 QueryProj/__pycache__
 *.pyc
 *.xml
+*.xml

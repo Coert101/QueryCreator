@@ -5,24 +5,25 @@ from SharedFunctionality import SharedFunctionality
 
 class SQLMockFactory:
     @staticmethod
-    def dir_builder(dir_from, dir_to, file_name, db_name):
+    def dir_builder(dir_from, dir_to, file_to_name, db_name):
 
-        insert_name = dir_to + file_name + ".sql"
+        file_to_insert_to = dir_to + file_to_name + ".sql"
 
-        if os.path.exists(insert_name):
-            os.remove(insert_name)
+        if os.path.exists(file_to_insert_to):
+            os.remove(file_to_insert_to)
 
-        new_file = open(insert_name, "a")
+        new_file = open(file_to_insert_to, "a")
         new_file.write("USE [" + db_name + "]\nGO\n")
         new_file.close()
 
         for f in listdir(dir_from):
-            SQLMockFactory.read_file(dir_from, dir_to, f, insert_name, db_name)
+            if SharedFunctionality.check_file_enum(dir_from, f) is False:
+                SQLMockFactory.read_file(dir_from, f, file_to_insert_to)
 
     @staticmethod
-    def read_file(dir_name, file_name, insert_queries_file):
+    def read_file(dir_from, file_from_name, file_to_script_to):
 
-        file = open(dir_name + file_name, "r")
+        file = open(dir_from + file_from_name, "r")
         iteration_amount = 0
 
         for line_check in file:
@@ -36,7 +37,7 @@ class SQLMockFactory:
         for x in range(0, iteration_amount):
 
             file.close()
-            file = open(dir_name + file_name, "r")
+            file = open(dir_from + file_from_name, "r")
             model_class = False
             string_insert = "INSERT"
 
@@ -72,7 +73,7 @@ class SQLMockFactory:
                 string_insert = string_insert[:-1]
                 string_insert = string_insert + ") VALUES ()\nGO"
 
-                insert_file = open(insert_queries_file, "a")
+                insert_file = open(file_to_script_to, "a")
                 insert_file.write(string_insert + '\n')
 
             # Go on here
