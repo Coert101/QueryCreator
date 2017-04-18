@@ -18,8 +18,8 @@
       <file leaf-file-name="QueryBuilder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/QueryBuilder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="37" column="77" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="77" />
+            <state relative-caret-position="207">
+              <caret line="62" column="47" lean-forward="true" selection-start-line="62" selection-start-column="47" selection-end-line="62" selection-end-column="47" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -30,8 +30,8 @@
       <file leaf-file-name="SQLMockFactory.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SQLMockFactory.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="15" column="53" lean-forward="true" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+            <state relative-caret-position="768">
+              <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -42,8 +42,8 @@
       <file leaf-file-name="SharedFunctionality.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SharedFunctionality.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+            <state relative-caret-position="204">
+              <caret line="57" column="25" lean-forward="true" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -54,8 +54,8 @@
       <file leaf-file-name="PreAdapter.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PreAdapter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="479">
+              <caret line="67" column="46" lean-forward="true" selection-start-line="58" selection-start-column="3" selection-end-line="67" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -95,6 +95,11 @@
       <find>fileName</find>
       <find>print</find>
       <find>insert_queries_file</find>
+      <find>address</find>
+      <find>countr</find>
+      <find>country</find>
+      <find>type_line</find>
+      <find>type_equivalent</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -724,8 +729,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/QueryBuilder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="37" column="77" lean-forward="true" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="77" />
+        <state relative-caret-position="207">
+          <caret line="62" column="47" lean-forward="true" selection-start-line="62" selection-start-column="47" selection-end-line="62" selection-end-column="47" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -744,16 +749,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PreAdapter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+        <state relative-caret-position="479">
+          <caret line="67" column="46" lean-forward="true" selection-start-line="58" selection-start-column="3" selection-end-line="67" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SQLMockFactory.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="53" lean-forward="true" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
+        <state relative-caret-position="768">
+          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
@@ -762,8 +767,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SharedFunctionality.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+        <state relative-caret-position="204">
+          <caret line="57" column="25" lean-forward="true" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

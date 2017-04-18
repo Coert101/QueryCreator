@@ -1,10 +1,14 @@
 import os
 from os import listdir
+from random import randint
+import random
+import decimal
+import time
 
 class SharedFunctionality:
-    known_types = ["string", "int", "double", "decimal", "bool", "DateTime"]
-    type_equivalent = ["VARCHAR (255)", "INT", "DECIMAL", "DECIMAL", "BIT", "DATETIME"]
-    
+    known_types = ["string", "int", "double", "decimal", "bool", "DateTime", "CustomerAccount", "CustomerSubaccount", "Branch", "DocumentType", "Country", "Province", "CorporationType", "AgeGroup", "Address", "EntityType", "ProductDetailType", "YesNoQuestion", "ProductClass", "OwnerDetail", "WarrantyStatus", "CustomerAccount", "CustomerSubaccount", "Branch", "DocumentType", "Country", "Province", "CorporationType", "AgeGroup", "Address", "EntityType", "ProductDetailType", "YesNoQuestion", "ProductClass", "OwnerDetail", "WarrantyStatus"]
+    type_equivalent = ["VARCHAR (255)", "INT", "DECIMAL", "DECIMAL", "BIT", "DATETIME", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "BIT", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)", "BIT", "VARCHAR (255)", "VARCHAR (255)", "VARCHAR (255)"]
+
     def get_usable_line(currentLine):
         if ((currentLine.strip() is "")):
             return False;
@@ -56,3 +60,19 @@ class SharedFunctionality:
                 return True
 
         return False;
+
+    def generate_mock_data(data_type):
+        typeName = SharedFunctionality.type_equivalent[SharedFunctionality.known_types.index(data_type)]
+        return SharedFunctionality.data_for_type(typeName)
+
+    @staticmethod
+    def data_for_type(type):
+        return {
+            "VARCHAR (255)": "N'test data'",
+            "INT": randint(0,100),
+            "DECIMAL": decimal.Decimal(random.randrange(10000))/100,
+            "DECIMAL": decimal.Decimal(random.randrange(10000))/100,
+            "BIT": False,
+            "DATETIME": "GETDATE()",
+        }.get(type, "test data")
+

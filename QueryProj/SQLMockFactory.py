@@ -40,6 +40,7 @@ class SQLMockFactory:
             file = open(dir_from + file_from_name, "r")
             model_class = False
             string_insert = "INSERT"
+            mock_data_insert = "";
 
             for line in file:
 
@@ -68,10 +69,13 @@ class SQLMockFactory:
                     if type_line is not False:
                         string_insert = string_insert + SharedFunctionality.extract_parameter(
                             type_line, line) + ','
+                        mock_data_insert = mock_data_insert + str(SharedFunctionality.generate_mock_data(type_line)) + ", "
+
 
             if model_class:
                 string_insert = string_insert[:-1]
-                string_insert = string_insert + ") VALUES ()\nGO"
+                mock_data_insert = mock_data_insert.strip()[:-1]
+                string_insert = string_insert + ") VALUES (" + mock_data_insert + ")\nGO"
 
                 insert_file = open(file_to_script_to, "a")
                 insert_file.write(string_insert + '\n')
